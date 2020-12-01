@@ -1,3 +1,4 @@
+//ბევრი რამეა დასარედაქტირებელი აქაც და zodiac.h-შიც
 /****************************************\
 * Zodiac			        *
 * Written By Makrine Tskipurishvili     *
