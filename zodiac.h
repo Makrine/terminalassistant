@@ -1,3 +1,4 @@
+//ბევრი რამეა დასარედაქტირებელი აქაც და Zodiac.cpp-შიც
 #include <iostream>
 #include <string>
 #include <cctype>
