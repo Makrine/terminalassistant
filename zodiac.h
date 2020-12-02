@@ -35,9 +35,9 @@ public:
 
 */
 	}
-	void Choice1() {PrintSign(); cout << "Choose another digit from the menu..."; Choice();}
-	void Choice2() {PrintChSign(); cout << "Choose another digit from the menu..."; Choice();}
-	void Choice3() {PrintLPN(); cout << "Choose another digit from the menu..."; Choice();}
+	void Choice1() {PrintSign(); cout << "Choose another digit from the menu..." << endl; Choice();}
+	void Choice2() {PrintChSign(); cout << "Choose another digit from the menu..." << endl; Choice();}
+	void Choice3() {PrintLPN(); cout << "Choose another digit from the menu..." << endl; Choice();}
 	void Choice4() {PrintFileToConsole(); Choice();}
 	void Choice5() {ReadInfo(); Choice();}
 	void Choice6() {BlankFile(); ReadInfo(); Choice();}
