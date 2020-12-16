@@ -105,7 +105,7 @@ void choice3(char* filename, class ZODIAC& A) {
 	menu(filename, A);
 }
 void choice4(char* filename, class ZODIAC& A) {
-
+//TODO
 }
 void choice5(char* filename, class ZODIAC& A) {
 	clear();
@@ -146,7 +146,7 @@ void choice7(char* filename, class ZODIAC& A) {
 
 }
 void choice8(char* filename, class ZODIAC& A) {
-
+//TODO
 }
 void choice(char* filename, class ZODIAC& A) {
 	echo();
