@@ -5,7 +5,18 @@
 // source https://stackoverflow.com/questions/22399406/drawing-boxes-using-ncurses/22399551 FOR THE FRAME
 
 
-
+void removeLine(char* filename, class ZODIAC& A);
+void FRAME(int y1, int x1, int y2, int x2);
+void skeleton();
+void choice1(char* filename, class ZODIAC& A);
+void choice2(char* filename, class ZODIAC& A);
+void choice3(char* filename, class ZODIAC& A);
+void choice4(char* filename, class ZODIAC& A);
+void choice5(char* filename, class ZODIAC& A);
+void choice6(char* filename, class ZODIAC& A);
+void choice7(char* filename, class ZODIAC& A);
+void choice8(char* filename, class ZODIAC& A);
+void choice(char* filename, class ZODIAC& A);
 void menu(char* filename, class ZODIAC& A);
 void currentUser(class ZODIAC& A);
 void input(char* filename, class ZODIAC& A);
