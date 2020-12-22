@@ -1,5 +1,6 @@
 #include <ncurses.h>
 #include "zodiac.h"
+#include "desc.h"
 #include <cstring>
 
 // source https://stackoverflow.com/questions/22399406/drawing-boxes-using-ncurses/22399551 FOR THE FRAME
@@ -15,6 +16,49 @@ void PrintFile(char* filename) {
 	ifstream file(filename);
 	for(int i=0;getline(file, line);i++) mvprintw(i, 0, "%s", line.c_str());
 }
+
+void ShowDescWest(string sign) {
+	if(sign == "Aries") Aries();
+	else if(sign == "Taurus") Taurus();
+	else if(sign == "Gemini") Gemini();
+	else if(sign == "Cancer") Cancer();
+	else if(sign == "Leo") Leo();
+	else if(sign == "Virgo") Virgo();
+	else if(sign == "Libra") Libra();
+	else if(sign == "Scorpio") Scorpio();
+	else if(sign == "Sagittarius") Sagittarius();
+	else if(sign == "Capricorn") Capricorn();
+	else if(sign == "Aquarius") Aquarius();
+	else if(sign == "Pisces") Pisces();
+}
+void ShowDescChinese(string sign) {
+	if(sign == "Rat") Rat();
+	else if(sign == "Ox") Ox();
+	else if(sign == "Tiger") Tiger();
+	else if(sign == "Rabbit") Rabbit();
+	else if(sign == "Dragon") Dragon();
+	else if(sign == "Snake") Snake();
+	else if(sign == "Horse") Horse();
+	else if(sign == "Goat") Goat();
+	else if(sign == "Monkey") Monkey();
+	else if(sign == "Rooster") Rooster();
+	else if(sign == "Dog") Dog();
+	else if(sign == "Pig") Pig();
+}
+void ShowDescNum(int num) {
+	if(num == 1) One();
+	else if(num == 2) Two();
+	else if(num == 3) Three();
+	else if(num == 4) Four();
+	else if(num == 5) Five();
+	else if(num == 6) Six();
+	else if(num == 7) Seven();
+	else if(num == 8) Eight();
+	else if(num == 9) Nine();
+
+
+}
+
 void removeLine(char* filename) {
 
 	string target = A.GetCurrent();
@@ -62,10 +106,11 @@ void choice1(char* filename) {
 	char sign[15];
 	strcpy(sign, A.GetSunSign(A.GetBirthdate()).c_str());
 	mvprintw(8, 22, "You are a %s! :)", sign);
-	
+	string str(sign);
+	ShowDescWest(sign);
 	noecho();
 	curs_set(0);
-	mvprintw(10, 22, "Press any key to go back to menu...");
+	mvprintw(21, 22, "Press any key to go back to menu...");
 	getch();
 	menu(filename);
 }
@@ -76,10 +121,11 @@ void choice2(char* filename) {
 	char sign[15];
 	strcpy(sign, A.GetChineseSign(A.GetBirthdate()).c_str());
 	mvprintw(8, 22, "You are a %s! :)", sign);
-	
+	string str(sign);
+	ShowDescChinese(sign);
 	noecho();
 	curs_set(0);
-	mvprintw(10, 22, "Press any key to go back to menu...");
+	mvprintw(21, 22, "Press any key to go back to menu...");
 	getch();
 	menu(filename);
 }
@@ -90,10 +136,10 @@ void choice3(char* filename) {
 	int num;
 	num = A.GetLifePathNumber(A.GetBirthdate());
 	mvprintw(8, 22, "Your Life Path Number is %d! :)", num);
-	
+	ShowDescNum(num);
 	noecho();
 	curs_set(0);
-	mvprintw(10, 22, "Press any key to go back to menu...");
+	mvprintw(25, 22, "Press any key to go back to menu...");
 	getch();
 	menu(filename);
 }
@@ -146,9 +192,7 @@ void choice7(char* filename) {
 }
 
 void choice8() {
-/*	system("clear");
-	exit(0);
-*/
+	delwin(stdscr);
 	endwin();
 	refresh();
 }
