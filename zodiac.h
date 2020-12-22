@@ -108,6 +108,7 @@ public:
 		else if((dd >= 22 && dd <= 31 && mm == 11) || (dd >= 1 && dd <= 21 && mm == 12)) return "Sagittarius";
 		else if((dd >= 22 && dd <= 30 && mm == 12) || (dd >= 1 && dd <= 19 && mm == 1)) return "Capricorn";
 		else if((dd >= 20 && dd <= 31 && mm == 1) || (dd >= 1 && dd <= 18 && mm == 2)) return "Aquarius";
+		else if((dd >= 19 && dd <= 29 && mm == 2) || (dd >= 1 && dd <= 20 && mm == 3)) return "Pisces";
 		return "ERROR";
 	}
 	string GetChineseSign(string bd) {
@@ -215,5 +216,4 @@ public:
 	}
 	void Sort() {sort(list, list+size, cmp);}
 	void PrintToFile(string filename) {list->BlankFile(filename); for(int i=0; i <size; i++) list[i].PrintToFile(filename);}
-
 };
