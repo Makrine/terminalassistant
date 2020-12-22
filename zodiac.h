@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <algorithm>
+#include <ctype.h>
 using namespace std;
 
 
@@ -50,6 +51,23 @@ public:
 		}
 		myfile << birthdate << endl;
 		myfile.close();
+	}
+	bool CheckNameSurname(string nm) {bool flag = true; int len=nm.size(); for(int i=0; i <len; i++) if(isalpha(nm[i])) flag = true; else {flag=false; break;} if(nm=="") flag=false; return flag;}
+	bool CheckDate(string bd) {
+		bool flag=true;
+		if(bd=="") flag = false;
+		if(isdigit(bd[0]) &&
+		isdigit(bd[1]) && 
+		isdigit(bd[3]) &&
+		isdigit(bd[4]) &&
+		isdigit(bd[6]) &&
+		isdigit(bd[7]) &&
+		isdigit(bd[8]) &&
+		isdigit(bd[9]) &&
+		bd[2] == '/' && bd[5] == '/'
+		) flag =true;
+		else flag = false;
+		return flag;
 	}
 	void SetName(string nm) {name = nm;}
 	void SetSurname(string snm) {surname = snm;}
@@ -164,7 +182,7 @@ bool cmp(const class ZODIAC& p, const class ZODIAC& q) {
 class PEOPLE {
 private:
 	class ZODIAC* list;
-	int size = -2; //size of ZODIAC* list
+	int size; //size of ZODIAC* list
 public:
 
 	void SetSize(string filename) {int n = GetNumOfUsers(filename); list = new class ZODIAC[n];}
@@ -175,6 +193,7 @@ public:
 		for(;getline(file, line);) {
 			c++;
 			if(c<3) continue;
+			else if(line[1] == ' ') continue;
 			else {
 				j = 0;
 				stringstream iss(line);
@@ -188,19 +207,13 @@ public:
 	}
 	int GetNumOfUsers(string filename) {
 		string line;
+		size = 0;
 		ifstream file(filename);
 		while(getline(file, line)) size++;
+		size = size - 2;
 		return size;
 	}
 	void Sort() {sort(list, list+size, cmp);}
 	void PrintToFile(string filename) {list->BlankFile(filename); for(int i=0; i <size; i++) list[i].PrintToFile(filename);}
-	//void Print() {for(int i=0; i <size; i++) cout<<list[i].GetName() << " " << list[i].GetSurname() << " " <<list[i].GetBirthdate() << endl;}
-/*	
-	void PrintFile(string filename) {
-		string line;
-		ifstream file(filename);
-		while(getline(file, line)) cout << line << endl;
-	}
-*/
-};
 
+};
