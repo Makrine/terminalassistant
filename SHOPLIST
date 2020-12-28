@@ -1,0 +1,230 @@
+#include<string>
+#include<iomanip>
+#include<algorithm>
+int i,size=1000,q,l;
+string product,s;
+char c,n='0';
+class shoplist
+{
+	private:
+		string name,type,quantity;
+	public:
+		// to show information
+		void printdata(int i)
+		{
+			mvaddstr(i,0,name);
+			addch(i,10,'|');
+			mvaddstr(i,11,quantity);
+			addch(i,14,'|');
+			mvaddstr(i,15,type);
+			addch(i,25,'|');
+		}
+		// to add two quantity
+		void add(string x)
+		{
+			string some,qu=quantity;
+			int a=0,carry=0,sum=0,diff=0,i,k=0;
+			int len1=quantity.length(),len2=x.length();
+			if(len1<len2)
+			{
+				qu=x;
+				x=quantity;
+				a=len1;
+				len1=len2;
+				len2=a;
+			}
+			diff=len1-len2;
+			for(i=len2-1;i>=0;i--)
+			{
+				sum=x[i]-'0'+qu[i+diff]-'0'+carry;
+				carry=sum/10;
+				sum%=10;
+				some[k]=sum+'0';
+				k++;
+			}
+			for(i=diff-1;i>=0;i--)
+			{
+				sum=qu[i]-'0'+carry;
+				carry=sum/10;
+				sum%=10;
+				some[k]=sum+'0';
+				k++;
+			}
+			if(carry=1)
+			{
+				some[k]=sum+'0';
+				k++;
+			}
+			for(i=0;i<k;i++)
+			quantity[i]=some[k-i-1];
+		}
+		//read information
+		void Read(string x)
+		{
+			name=x;
+			printw("Enter the Quantity: ");
+			getstr(quantity);
+			printw("Enter the type: ");
+			getstr(type);
+		}
+		string checkn()
+		{
+			return name;
+		}
+		int checkq()
+		{
+			return quantity;
+		}
+		string checkt()
+		{
+			return type;
+		}
+		//for sortig
+		friend bool cmp1(shoplist const &a, shoplist const &b);
+		friend bool cmp2(shoplist const &a, shoplist const &b);
+		friend bool cmp3(shoplist const &a, shoplist const &b);
+};
+bool cmp1(shoplist const &a, shoplist const &b)
+{
+	return (a.name < b.name);
+}
+bool cmp2(shoplist const &a, shoplist const &b)
+{
+	return (a.quantity < b.quantity);
+}
+bool cmp3(shoplist const &a, shoplist const &b)
+{
+	return (a.type < b.type);
+}
+void convert(string &x)
+{
+	int a=x.length();
+    while(a--)
+    {
+    	if(x[a]>64 && x[a]<91)
+    	x[a]+=32;
+	}
+}
+int main()
+{
+	shoplist a[size];
+	initscr();
+	printw("Hi this application helps you to manage your shopping list\n in order to use this application you need to enter three things\n name, quantity and type of that product\n");
+	int k=0;
+	while(n!='6')
+	{
+		printw("in order to add item on the list click 1,printdata click 2,\n sort and printdata click 3,remove element on list click 4,\n find element on list click 5,in order to exit click 6\n");
+		getch(n);
+		//for adding item in the list
+		if(n=='1')
+		{
+			printw("Enter the product name: ");
+			getstr(product);
+			convert(product);
+			for(i=0;i<k;i++)
+			if(product==a[i].checkn())
+			break;
+			if(product!=a[i].checkn())
+			{
+				a[k].Read(product);
+				k++;
+			}
+			else
+			{
+				printw("Enter the Quantity: ");
+				getstr(q);
+				a[i].add(q);
+			}
+		}
+		// for showing date
+		else if(n=='2')
+		{
+			wrefresh();
+			for(i=0;i<k;i++)
+			{
+				cout<<i+1<<"|";
+   				a[i].printdata(i);
+			}
+		}
+		// for sorting and showing data
+		else if(n=='3')
+		{
+   			printw("in order to sort by name on list click 1");
+   			printw("in order to sort by amount list click 2");
+   			printw("in order to sort by type list click 3");
+      		getch(c);
+      		wrefresh();
+   			if(c=='1')
+   			sort(a,a+k,cmp1);
+			else if(c=='2')
+			sort(a,a+k,cmp1);
+			else if(c=='3')
+			sort(a,a+k,cmp1);
+			else
+			{
+				printw("incorrect charecter try again ");
+			}
+			for(i=0;i<k;i++)
+			{
+				cout<<i+1<<"|";
+   				a[i].printdata();
+			}
+		}
+		//for removing elemnt
+		else if(n=='4')
+		{
+			printw("in order to remove element by name click 1");
+			printw("in order to remove elements by type click 2");
+   			getch(c);
+			if(c=='1')
+			{
+				printw("Enter the product name: ");
+    			getstr(s);
+				for(i=0;i<k;i++)
+				if(s==a[i].checkn())
+				break;
+				k--;
+				for(;i<k;i++)
+				{
+					a[i].checkn()==a[i+1].checkn();
+					a[i].checkt()==a[i+1].checkt();
+					a[i].checkq()==a[i+1].checkq();
+				}
+
+			}
+			else if(c=='2')
+			{
+				printw("Enter the product type: ");
+				getstr(s);
+				for(i=0;i<k;i++)
+				if(s==a[i].checkt())
+				{
+	 				a[i].checkn()==a[i+1].checkn();
+					a[i].checkt()==a[i+1].checkt();
+					a[i].checkq()==a[i+1].checkq();
+					i--;
+					k--;
+				}
+			}
+			else
+			{
+				printw("incorrect charecter try again ");
+			}
+		}
+		//for finding elemet
+		else if(n=='5')
+		{
+			printw("Enter the product name: ");
+			getstr(s);
+			for(i=0;i<k;i++)
+			if(s==a[i].checkn())
+			break;
+   			a[i].printdata(i);
+		}
+		else
+		{
+			printw("incorrect charecter try again ");
+		}
+	}
+	endwin();
+}
