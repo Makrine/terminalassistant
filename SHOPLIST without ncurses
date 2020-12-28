@@ -1,0 +1,203 @@
+#include<iostream>
+#include<string>
+#include<iomanip>
+#include<algorithm>
+using namespace std;
+int n,i,size=1000,q,c,l;
+string product,s;
+class shoplist
+{
+	private:
+		string name,type;
+		int quantity;
+	public:
+		void printdata()
+		{
+			cout<<setw(10)<<name;
+			cout<<"|";
+			cout<<setw(5)<<quantity;
+			cout<<"|";
+			cout<<setw(10)<<type;
+			cout<<"|"<<endl;
+		}
+		void add(int x)
+		{
+			quantity+=x;
+		}
+		void Read(string x)
+		{
+			name=x;
+			cout<<"Enter the Quantity: ";
+			cin>>quantity;
+			cout<<"Enter the type: ";
+			cin>>type;
+		}
+		string checkn()
+		{
+			return name;
+		}
+		int checkq()
+		{
+			return quantity;
+		}
+		string checkt()
+		{
+			return type;
+		}
+		friend bool cmp1(shoplist const &a, shoplist const &b);
+		friend bool cmp2(shoplist const &a, shoplist const &b);
+		friend bool cmp3(shoplist const &a, shoplist const &b);
+};
+bool cmp1(shoplist const &a, shoplist const &b)
+{
+	return (a.name < b.name);
+}
+bool cmp2(shoplist const &a, shoplist const &b)
+{
+	return (a.quantity < b.quantity);
+}
+bool cmp3(shoplist const &a, shoplist const &b)
+{
+	return (a.type < b.type);
+}
+void convert(string &x)
+{
+	int a=x.length();
+    while(a--)
+    {
+    	if(x[a]>64 && x[a]<91)
+    	x[a]+=32;
+	}
+}
+int main()
+{
+	shoplist a[size];
+	cout<<"Hi this application helps you to manage your shopping list"<<endl;
+	cout<<"in order to use this application you need to enter tree things"<<endl;
+	cout<<"name, quantity and type of that product"<<endl;
+	cout<<"in order to add item on thelist click 1"<<endl;
+	cout<<"in order to printdata click 2"<<endl;
+	cout<<"in order to sort and printdata click 3"<<endl;
+	cout<<"in order to remove element on list click 4"<<endl;
+	cout<<"in order to find element on list click 5"<<endl;
+	cout<<"in order to exit click 6"<<endl;
+	int k=0;
+	cin>>n;
+	while(n!=6)
+	{
+		if(n==1)
+		{
+			cout<<"Enter the product name: ";
+			cin>>product;
+			convert(product);
+			for(i=0;i<k;i++)
+			if(product==a[i].checkn())
+			break;
+			if(product!=a[i].checkn())
+			{
+				a[k].Read(product);
+				k++;
+			}
+			else
+			{
+				cout<<"Enter the Quantity: ";
+				cin>>q;
+				a[i].add(q);
+			}
+		}
+		else if(n==2)
+		{
+			for(i=0;i<k;i++)
+			{
+				cout<<i+1<<"|";
+   				a[i].printdata();
+			}
+		}
+		else if(n==3)
+		{
+   			cout<<"in order to sort by name on list click 1"<<endl;
+   			cout<<"in order to sort by amount list click 2"<<endl;
+   			cout<<"in order to sort by type list click 3"<<endl;
+      		cin>>c;
+   			if(c==1)
+   			sort(a,a+k,cmp1);
+			else if(c==2)
+			sort(a,a+k,cmp1);
+			else
+			sort(a,a+k,cmp1);
+			for(i=0;i<k;i++)
+			{
+				cout<<i+1<<"|";
+   				a[i].printdata();
+			}
+		}
+		else if(n==4)
+		{
+			cout<<"in order to remove element by name click 1"<<endl;
+			cout<<"in order to remove element by index click 2"<<endl;
+			cout<<"in order to remove elements by type click 3"<<endl;
+   			cin>>c;
+			if(c==1)
+			{
+				cout<<"Enter the product name: ";
+    			cin>>s;
+				for(i=0;i<k;i++)
+				if(s==a[i].checkn())
+				break;
+				k--;
+				for(;i<k;i++)
+				{
+					a[i].checkn()==a[i+1].checkn();
+					a[i].checkt()==a[i+1].checkt();
+					a[i].checkq()==a[i+1].checkq();
+				}
+
+			}
+			else if(c==2)
+			{
+				cout<<"Enter the product index: ";
+				cin>>l;
+				l--;
+				k--;
+				for(i=l;i<k;i++)
+				{
+					a[i].checkn()==a[i+1].checkn();
+					a[i].checkt()==a[i+1].checkt();
+					a[i].checkq()==a[i+1].checkq();
+				}
+
+			}
+			else
+			{
+				cout<<"Enter the product type: ";
+				cin>>s;
+				for(i=0;i<k;i++)
+				if(s==a[i].checkt())
+				{
+	 				a[i].checkn()==a[i+1].checkn();
+					a[i].checkt()==a[i+1].checkt();
+					a[i].checkq()==a[i+1].checkq();
+					i--;
+					k--;
+				}
+			}
+		}
+		else
+		{
+			cout<<"Enter the product name: ";
+			cin>>s;
+			for(i=0;i<k;i++)
+			if(s==a[i].checkn())
+			break;
+			cout<<i+1<<"|";
+   			a[i].printdata();
+		}
+		cout<<"in order to add item on thelist click 1"<<endl;
+		cout<<"in order to printdata click 2"<<endl;
+		cout<<"in order to sort and printdata click 3"<<endl;
+		cout<<"in order to remove element on list click 4"<<endl;
+		cout<<"in order to find element on list click 5"<<endl;
+		cout<<"in order to exit click 6"<<endl;
+		cin>>n;
+	}
+}
