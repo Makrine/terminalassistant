@@ -122,9 +122,9 @@ int main()
    			if(c==1)
    			sort(a,a+k,cmp1);
 			else if(c==2)
-			sort(a,a+k,cmp1);
+			sort(a,a+k,cmp2);
 			else
-			sort(a,a+k,cmp1);
+			sort(a,a+k,cmp3);
 			for(i=0;i<k;i++)
 			{
 				cout<<i+1<<"|";
