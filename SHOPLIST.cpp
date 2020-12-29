@@ -235,7 +235,6 @@ int main()
 				}
 				*/
 			}
-			}
 			else if(c=='2')
 			{
 				printw("\nEnter the product type: ");
@@ -261,6 +260,7 @@ int main()
 				printw("\nIncorrect charecter try again\n\n");
 	   			printw("\n\nPress any key to continue...");
    				getch();
+			}
 			}
 		}
 		//for finding elemet
