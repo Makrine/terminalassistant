@@ -92,6 +92,7 @@ class shoplist
 		friend bool cmp1(shoplist const &a, shoplist const &b);
 		friend bool cmp2(shoplist const &a, shoplist const &b);
 		friend bool cmp3(shoplist const &a, shoplist const &b);
+		friend void DeleteElement(int &sz, shoplist* arr, string n, string t);
 };
 bool cmp1(shoplist const &a, shoplist const &b)
 {
@@ -99,7 +100,7 @@ bool cmp1(shoplist const &a, shoplist const &b)
 }
 bool cmp2(shoplist const &a, shoplist const &b)
 {
-	int qA = stoi(a.quantity);//ორნიშნა და მეტნიშნა რიცხვზე არ მუშაობდა რადგან მაგალითად "10"-ს სტრინგად ხედავდა და მაგ, "5"-ზე ნაკლებად აღიქვამდა
+	int qA = stoi(a.quantity);
 	int qB = stoi(b.quantity);
 	return (qA < qB);
 }
@@ -114,6 +115,33 @@ void convert(string &x)
     {
     	if(x[a]>64 && x[a]<91)
     	x[a]+=32;
+	}
+}
+void DeleteElement(int &sz, shoplist* arr, string n, string t) //function to delete an element. 
+{	
+	if(t == "0") 						//if type is 0 then it will take care of the name
+	{
+		int i;	
+		for (i = 0; i < sz; i++) 
+			if (arr[i].name == n) break;   
+		if (i < sz) 
+		{
+			sz = sz - 1; 
+			for (int j = i; j < sz; j++) 
+			arr[j] = arr[j+1]; 
+		} 
+	}
+	if(n == "0")					//if name is 0 then it will take care of the name
+	{
+		int i; 
+		for (i = 0; i < sz; i++) 
+			if (arr[i].type == t) break;   
+		if (i < sz)
+		{
+			sz = sz - 1; 
+			for (int j = i; j < sz; j++) 
+			arr[j] = arr[j+1]; 
+		} 
 	}
 }
 int main()
@@ -222,6 +250,10 @@ int main()
 				getstr(sChar);
 				string str5(sChar); //convert char array to string
 				s = sChar; //assign to s
+				
+				DeleteElement(k, a, s, "0");
+				
+				/*
 				for(i=0;i<k;i++)
 				if(s==a[i].checkn())
 				break;
@@ -232,7 +264,7 @@ int main()
 					a[i].checkt()==a[i+1].checkt();
 					a[i].checkq()==a[i+1].checkq();
 				}
-
+				*/
 			}
 			else if(c=='2')
 			{
@@ -241,6 +273,9 @@ int main()
 				getstr(sChar);
 				string str6(sChar); //convert char array to string
 				s = sChar; //assign to s
+				
+				DeleteElement(k, a, "0", s);
+				/*
 				for(i=0;i<k;i++)
 				if(s==a[i].checkt())
 				{
@@ -249,7 +284,7 @@ int main()
 					a[i].checkq()==a[i+1].checkq();
 					i--;
 					k--;
-				}
+				}*/
 			}
 			else
 			{
