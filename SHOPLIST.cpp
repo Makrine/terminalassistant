@@ -320,6 +320,12 @@ int main()
    			}
 
 		}
+		else if(n == '6') 
+		{
+			delwin(stdscr);
+			endwin();
+			refresh();
+		}
 		else
 		{
 			printw("\nIncorrect charecter try again\n\n");
