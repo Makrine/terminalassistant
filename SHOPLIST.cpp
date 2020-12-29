@@ -126,7 +126,7 @@ int main()
 	while(n!='6')
 	{
 		clear();
-		printw("In order to add item on the list - press 1\nPrint data - press 2,\nSort and print - press click 3\nRemove element on list - press 4,\nFind element on list - press 5\nIn order to exit - press 6\n\n");
+		printw("In order to add item on the list - press 1\nPrint data - press 2,\nSort and print - press 3\nRemove element on list - press 4,\nFind element on list - press 5\nIn order to exit - press 6\n\n");
 		n = getch(); //getch(n) - wrong, getch() takes no arguments
 		//for adding item in the list
 		if(n=='1')
