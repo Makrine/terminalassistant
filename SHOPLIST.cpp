@@ -88,9 +88,6 @@ class shoplist
 		{
 			return type;
 		}
-		void setName(string n) {name = n;}
-		void setQuantity(string qn) {quantity = qn;}
-		void setType(string t) {type = t;}
 		//for sortig
 		friend bool cmp1(shoplist const &a, shoplist const &b);
 		friend bool cmp2(shoplist const &a, shoplist const &b);
@@ -102,7 +99,7 @@ bool cmp1(shoplist const &a, shoplist const &b)
 }
 bool cmp2(shoplist const &a, shoplist const &b)
 {
-	int qA = stoi(a.quantity);
+	int qA = stoi(a.quantity);//ორნიშნა და მეტნიშნა რიცხვზე არ მუშაობდა რადგან მაგალითად "10"-ს სტრინგად ხედავდა და მაგ, "5"-ზე ნაკლებად აღიქვამდა
 	int qB = stoi(b.quantity);
 	return (qA < qB);
 }
