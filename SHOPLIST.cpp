@@ -208,6 +208,7 @@ int main()
 		else if(n=='4')
 		{
 			if(k==0) {printw("\n\nNo items in the list..."); printw("\n\nPress any key to continue..."); getch();} //in case of no items
+			else {
 			printw("\nIn order to remove element by name click 1");
 			printw("\nIn order to remove elements by type click 2\n\n");
    			c = getch();  //getch(c) - wrong, getch() takes no arguments
@@ -233,6 +234,7 @@ int main()
 					a[i].checkq()==a[i+1].checkq();
 				}
 				*/
+			}
 			}
 			else if(c=='2')
 			{
