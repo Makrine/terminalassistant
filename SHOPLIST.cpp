@@ -24,41 +24,9 @@ class shoplist
 		// to add two quantity
 		void add(string x)
 		{
-			string some,qu=quantity;
-			int a=0,carry=0,sum=0,diff=0,i,k=0;
-			int len1=quantity.length(),len2=x.length();
-			if(len1<len2)
-			{
-				qu=x;
-				x=quantity;
-				a=len1;
-				len1=len2;
-				len2=a;
-			}
-			diff=len1-len2;
-			for(i=len2-1;i>=0;i--)
-			{
-				sum=x[i]-'0'+qu[i+diff]-'0'+carry;
-				carry=sum/10;
-				sum%=10;
-				some[k]=sum+'0';
-				k++;
-			}
-			for(i=diff-1;i>=0;i--)
-			{
-				sum=qu[i]-'0'+carry;
-				carry=sum/10;
-				sum%=10;
-				some[k]=sum+'0';
-				k++;
-			}
-			if(carry=1)
-			{
-				some[k]=sum+'0';
-				k++;
-			}
-			for(i=0;i<k;i++)
-			quantity[i]=some[k-i-1];
+			int addstr;
+			addstr=stoi(x)+stoi(quantity);
+			quantity=to_string(addstr);
 		}
 		//read information
 		void Read(string x)
