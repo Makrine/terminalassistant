@@ -14,12 +14,12 @@ class shoplist
 		// to show information
 		void printdata(int i)
 		{
-			mvaddstr(i,0,name.c_str());
-			mvaddstr(i,10,"|"); //addch() changed to mvaddstr because addch() takes only 2 arguments, 3 was provided
-			mvaddstr(i,11,quantity.c_str());
-			mvaddstr(i,14,"|");//addch() changed to mvaddstr
-			mvaddstr(i,15,type.c_str());
-			mvaddstr(i,25,"|");//addch() changed to mvaddstr
+			mvaddstr(i,5,name.c_str());
+			mvaddstr(i,15,"|"); //addch() changed to mvaddstr because addch() takes only 2 arguments, 3 was provided
+			mvaddstr(i,16,quantity.c_str());
+			mvaddstr(i,26,"|");//addch() changed to mvaddstr
+			mvaddstr(i,27,type.c_str());
+			mvaddstr(i,37,"|");//addch() changed to mvaddstr
 		}
 		// to add two quantity
 		void add(string x)
@@ -73,7 +73,6 @@ class shoplist
 			//convert char array to string and assign them to string quantity and string type
 			string str1(quantityChar);
 			string str2(typeChar);
-			
 			quantity = quantityChar;
 			type = typeChar;
 		}
@@ -89,6 +88,9 @@ class shoplist
 		{
 			return type;
 		}
+		void setName(string n) {name = n;}
+		void setQuantity(string qn) {quantity = qn;}
+		void setType(string t) {type = t;}
 		//for sortig
 		friend bool cmp1(shoplist const &a, shoplist const &b);
 		friend bool cmp2(shoplist const &a, shoplist const &b);
@@ -100,7 +102,9 @@ bool cmp1(shoplist const &a, shoplist const &b)
 }
 bool cmp2(shoplist const &a, shoplist const &b)
 {
-	return (a.quantity < b.quantity);
+	int qA = stoi(a.quantity);
+	int qB = stoi(b.quantity);
+	return (qA < qB);
 }
 bool cmp3(shoplist const &a, shoplist const &b)
 {
@@ -153,7 +157,6 @@ int main()
 				getstr(qChar);
 				string str4(qChar);//convert char array to string
 				q = qChar;//assign to q
-				
 				a[i].add(q);
 				printw("\n\nItem added to the list!\n\nPress any key to continue..."); getch(); //Item added to the list!
 			}
@@ -163,14 +166,17 @@ int main()
 		{
 			refresh();
 			if(k==0) {printw("\n\nNo items in the list..."); printw("\n\nPress any key to continue..."); getch();} //in case of no items
+			else {
+			clear();
 			for(i=0;i<k;i++)
 			{
-				clear();
 				printw("%d|", i+1);
    				a[i].printdata(i);
-   				printw("\n\nPress any key to continue...");
-   				getch();
+				printw("\n");
 			}
+   			printw("\n\nPress any key to continue...");
+   			getch();}
+
 		}
 		// for sorting and showing data
 		else if(n=='3')
@@ -191,15 +197,18 @@ int main()
 			else
 			{
 				printw("\nIncorrect charecter try again\n");
-			}
-			for(i=0;i<k;i++)
-			{
-				clear();
-				printw("%d|", i+1);
-   				a[i].printdata(i);
-   				printw("\n\nPress any key to continue...");
+		   		printw("\n\nPress any key to continue...");
    				getch();
 			}
+			clear();
+			for(i=0;i<k;i++)
+			{
+				printw("%d|", i+1);
+   				a[i].printdata(i);
+				printw("\n");
+			}
+   			printw("\n\nPress any key to continue...");
+   			getch();
 			}
 		}
 		//for removing elemnt
@@ -248,24 +257,43 @@ int main()
 			else
 			{
 				printw("\nIncorrect charecter try again\n\n");
+	   			printw("\n\nPress any key to continue...");
+   				getch();
 			}
 		}
 		//for finding elemet
 		else if(n=='5')
 		{
+			bool flag = true;
 			printw("\nEnter the product name: ");
 			char sChar[20]; //create char array for s
 			getstr(sChar);
 			string str7(sChar); //convert char array to string
 			s = sChar; //assign to s
-			for(i=0;i<k;i++)
-			if(s==a[i].checkn())
-			break;
-   			a[i].printdata(i);
+			clear();
+			for(i=0;i<k;i++) {
+				if(s==a[i].checkn())
+				break;
+			}
+			if(k == 0 || i == k) {
+				flag = false;
+				printw("Item was not found :(");
+				printw("\n\nPress any key to continue...");
+				getch();
+			}
+			if(flag) {
+   				a[i].printdata(i);
+   				printw("\n\nPress any key to continue...");
+   				getch();
+   			}
+
 		}
 		else
 		{
 			printw("\nIncorrect charecter try again\n\n");
+   			printw("\n\nPress any key to continue...");
+   			getch();
+
 		}
 	}
 	endwin();
