@@ -37,7 +37,7 @@ In case of needing any help the following command is entered:
 
 HOW TO USE:
 
-After downloading all the project files:
+After downloading all the project files(from GitHub):
 
 1) Compile tersy.cpp
 2) Compile SHOPPING.cpp and zod.cpp using -lncurses
